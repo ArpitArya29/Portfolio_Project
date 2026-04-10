@@ -2,6 +2,7 @@ import { db } from "../libs/db.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { uploadOnClaudinary } from "../utils/claudinary.js";
 
 dotenv.config()
 
@@ -21,6 +22,11 @@ export const register = async(req, res) => {
             })
         }
 
+        let imagePath;
+        if(req.file) {
+            imagePath = await uploadOnClaudinary(req.file.path);
+        }
+
         console.log(process.env.HASHSALT);
         
 
@@ -30,7 +36,8 @@ export const register = async(req, res) => {
             data : {
                 name,
                 email,
-                password : hashedPassword
+                password : hashedPassword,
+                image : imagePath.url,
             }
         })
 
@@ -94,11 +101,14 @@ export const login = async(req, res) => {
             user : {
                 id : existingUser.id,
                 name : existingUser.name,
-                role : existingUser.role
+                role : existingUser.role,
+                image : existingUser.image
             }
         })
 
     } catch (error) {
+        console.log(error);
+        
         return res.status(500).json({
             success : false,
             message : "Error occured while login",
@@ -132,7 +142,7 @@ export const check = async(req, res) => {
         return res.status(200).json({
             success : true,
             message : "user is logged-in",
-            user : req.user
+            user : req.user,
         })
     } catch (error) {
         console.log(error);
