@@ -29,7 +29,6 @@ export const register = async(req, res) => {
 
         console.log(process.env.HASHSALT);
         
-
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = await db.user.create({
@@ -51,7 +50,6 @@ export const register = async(req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({
             success : false,
             message : "User Registration failed",
@@ -60,6 +58,8 @@ export const register = async(req, res) => {
     }
     
 }
+
+
 export const login = async(req, res) => {
     const {email, password} = req.body;
 
@@ -107,8 +107,6 @@ export const login = async(req, res) => {
         })
 
     } catch (error) {
-        console.log(error);
-        
         return res.status(500).json({
             success : false,
             message : "Error occured while login",
@@ -116,16 +114,16 @@ export const login = async(req, res) => {
         })
     }
 }
+
+
 export const logout = async(req, res) => {
     try {
-        // clear the saved cookie
         res.clearCookie("jwtlogintoken",{
             httpOnly:true,
             sameSite:"strict",
             secure:process.env.NODE_ENV!=="development",
         })
 
-        // send 204(no content) status code
         res.status(200).json({
             success:true,
             message: "User Logged-out Successfully"
@@ -137,6 +135,7 @@ export const logout = async(req, res) => {
     }
 }
 
+
 export const check = async(req, res) => {
     try {
         return res.status(200).json({
@@ -145,8 +144,6 @@ export const check = async(req, res) => {
             user : req.user,
         })
     } catch (error) {
-        console.log(error);
-        
         return res.status(500).json({
             success : false,
             message : "Error checking user",

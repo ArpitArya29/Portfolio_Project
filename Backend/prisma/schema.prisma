@@ -12,67 +12,103 @@ datasource db {
   provider = "postgresql"
 }
 
-enum Role{
+enum Role {
   USER
   ADMIN
 }
 
 model User {
-  id       String @id @default(uuid())
+  id       String  @id @default(uuid())
   name     String
-  email    String @unique
-  role Role @default(USER)
+  email    String  @unique
+  role     Role    @default(USER)
   password String
-  image String?
+  image    String?
+
+  createdAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  skills      Skill[]
+  experiences Experience[]
+  projects    Project[]
 
   portfolios Portfolio[]
 }
 
 model Portfolio {
-  id Int @id @default(autoincrement())
-  userId String @unique
-  bio String?
-  theme String @default("default")
+  id       Int     @id @default(autoincrement())
+  userId   String  @unique
+  bio      String?
+  theme    String  @default("default")
   isPublic Boolean @default(true)
 
-  skils Skill[]
-  projects Project[]
+  createdAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  skils      Skill[]
+  projects   Project[]
   experience Experience[]
 
   user User @relation(fields: [userId], references: [id])
 }
 
 model Skill {
-  id Int @id @default(autoincrement())
-  name String
+  id          Int    @id @default(autoincrement())
+  name        String
   proficiency Int
 
-  portfolioId Int
+  createdAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-  portfolio Portfolio @relation(fields: [portfolioId], references: [id])
+  // portfolioId Int
+  userId String
+
+  user User @relation(fields: [userId], references: [id])
+
+  portfolios Portfolio[]
+
+  // portfolio Portfolio @relation(fields: [portfolioId], references: [id])
+
+  @@unique([userId, name])
 }
 
 model Project {
-  id String @id @default(uuid())
-  title String
+  id          String @id @default(uuid())
+  title       String
   description String
   github_link String
-  live_link String
+  live_link   String
+
+  createdAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   portfolioId Int
+  userId      String
+
+  user User @relation(fields: [userId], references: [id])
 
   portfolio Portfolio @relation(fields: [portfolioId], references: [id])
+
+  @@unique([userId, title])
 }
 
 model Experience {
-  id String @id @default(uuid())
-  role String
-  company String
+  id          String    @id @default(uuid())
+  role        String
+  company     String
   description String
-  startDate DateTime
-  endDate DateTime?
+  startDate   DateTime
+  endDate     DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   portfolioId Int
+  userId      String
+
+  user User @relation(fields: [userId], references: [id])
 
   portfolio Portfolio @relation(fields: [portfolioId], references: [id])
+
+  @@unique([userId, role])
 }
