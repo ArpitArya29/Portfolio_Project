@@ -60,7 +60,7 @@ export const updateSkill = async(req, res) => {
 
         if(!name && !proficiency) {
             return res.status(400).json({
-                message : "Name or Proficiency required"
+                message : "Nothing to update"
             })
         }
 

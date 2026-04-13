@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
 import skillRouter from "./routes/skill.routes.js";
+import projectRouter from "./routes/project.routes.js";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ App.use(cors({
 App.use("/api/v1/auth", authRoutes);
 App.use("/api/v1/user", userRouter);
 App.use("/api/v1/user/skills", skillRouter);
+App.use("/api/v1/user/projects", projectRouter);
 
 // App.use("/", (req, res) => {
 //     res.send("Hello User");
