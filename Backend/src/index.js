@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth.routes.js";
 import userRouter from "./routes/user.routes.js";
 import skillRouter from "./routes/skill.routes.js";
 import projectRouter from "./routes/project.routes.js";
+import experienceRouter from "./routes/experience.routes.js";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ App.use("/api/v1/auth", authRoutes);
 App.use("/api/v1/user", userRouter);
 App.use("/api/v1/user/skills", skillRouter);
 App.use("/api/v1/user/projects", projectRouter);
+App.use("/api/v1/user/experiences", experienceRouter);
 
 // App.use("/", (req, res) => {
 //     res.send("Hello User");
