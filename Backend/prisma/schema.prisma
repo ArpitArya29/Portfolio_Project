@@ -38,6 +38,7 @@ model User {
 model Portfolio {
   id       Int     @id @default(autoincrement())
   userId   String
+  title    String
   bio      String?
   theme    String  @default("default")
   isPublic Boolean @default(true)
@@ -45,11 +46,13 @@ model Portfolio {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  skils      Skill[]
+  skills     Skill[]
   projects   Project[]
-  experience Experience[]
+  experiences Experience[]
 
   user User @relation(fields: [userId], references: [id])
+
+  @@unique([title, userId])
 }
 
 model Skill {

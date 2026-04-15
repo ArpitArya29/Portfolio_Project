@@ -9,6 +9,8 @@ import userRouter from "./routes/user.routes.js";
 import skillRouter from "./routes/skill.routes.js";
 import projectRouter from "./routes/project.routes.js";
 import experienceRouter from "./routes/experience.routes.js";
+import portfolioRouter from "./routes/portfolio.routes.js";
+import publicRouter from "./routes/public.routes.js";
 
 dotenv.config();
 
@@ -29,6 +31,8 @@ App.use("/api/v1/user", userRouter);
 App.use("/api/v1/user/skills", skillRouter);
 App.use("/api/v1/user/projects", projectRouter);
 App.use("/api/v1/user/experiences", experienceRouter);
+App.use("/api/v1/user/portfolios", portfolioRouter);
+App.use("/api/v1/public/portfolio", publicRouter);
 
 // App.use("/", (req, res) => {
 //     res.send("Hello User");
