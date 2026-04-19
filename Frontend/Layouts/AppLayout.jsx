@@ -8,13 +8,13 @@ import { Outlet } from "react-router-dom";
 const AppLayout = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen w-full">
       <Sidebar isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
 
-      <div className="flex flex-column">
+      <div className="flex-1 flex flex-col w-full">
         <Navbar />
 
-        <main className="p-4 overflow-y-auto">
+        <main className="flex-1 w-full p-4 overflow-y-auto bg-base-200">
           <Outlet />
         </main>
       </div>

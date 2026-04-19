@@ -10,6 +10,10 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import ProtectedRoute from "../Routes/ProtectedRoute";
 import AppLayout from "../Layouts/AppLayout";
+import SkillSPage from "./Pages/SkillSPage";
+import ExperiencePage from "./Pages/ExperiencePage";
+import ProjectPage from "./Pages/ProjectPage";
+import PortfolioPage from "./Pages/PortfolioPage";
 
 const App = () => {
   const { authUser, isCheckingAuth, checkAuth, logout } = useAuthStore();
@@ -27,13 +31,15 @@ const App = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen justify-start">
+    <div className="min-h-screen w-full">
       <Toaster />
 
       <Routes>
         <Route
           path="/"
-          element={authUser ? <Navigate to={"/app"}/> : <Navigate to={"/login"} />}
+          element={
+            authUser ? <Navigate to={"/app"} /> : <Navigate to={"/login"} />
+          }
         />
 
         <Route
@@ -54,13 +60,13 @@ const App = () => {
             </ProtectedRoute>
           }
         >
+          <Route index element={<UserDashboard />} />
           <Route path="dashboard" element={<UserDashboard />} />
+          <Route path="skills" element={<SkillSPage />} />
+          <Route path="experiences" element={<ExperiencePage />} />
+          <Route path="projects" element={<ProjectPage />} />
+          <Route path="portfolios" element={<PortfolioPage />} />
         </Route>
-
-        {/* <Route
-          path="/user"
-          element={authUser ? <UserDashboard /> : <Navigate to={"/"} />}
-        /> */}
       </Routes>
     </div>
   );
