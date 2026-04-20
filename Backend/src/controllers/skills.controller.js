@@ -20,7 +20,7 @@ export const addSkills = async(req, res) => {
 
         const createdSkills = await Promise.all(
             formattedSkills.map((skill) =>
-                    db.skill.create({
+                db.skill.create({
                     data: skill,
                 })
             )
@@ -46,13 +46,7 @@ export const updateSkill = async(req, res) => {
         const userId = req.user.id;
         const skillId = Number(req.params.id);
 
-        console.log(userId, skillId);
-        
-
         const {name, proficiency} = req.body;
-
-        console.log(name, proficiency);
-        
 
         const skill = await db.skill.findFirst({
             where : {
@@ -61,9 +55,6 @@ export const updateSkill = async(req, res) => {
             }
         })
 
-        console.log(skill);
-        
-        
         if(!skill) {
             return res.status(404).json({
                 message : "Skill not found"
@@ -92,7 +83,6 @@ export const updateSkill = async(req, res) => {
         });
 
     } catch (error) {
-        console.log("Error updating skills", error);
         
         return res.status(500).json({
             success : false,

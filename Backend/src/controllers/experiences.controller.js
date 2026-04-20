@@ -5,8 +5,14 @@ const parseDate = (date) => {
 
     const parsedDate = new Date(date);
 
-    return isNaN(parsedDate.getTime()) ? undefined : parsedDate; 
+    return isNaN(parsedDate.getTime()) ? null : parsedDate; 
 }
+
+const formatToISO = (date) => {
+  if (!date) return null;
+
+  return new Date(date).toISOString();
+};
 
 export const addExperiences = async(req, res) => {
     try {
@@ -17,7 +23,7 @@ export const addExperiences = async(req, res) => {
             return res.status(400).json( {
                 message : "Experience required to add"
             })
-        }
+        }        
 
         const emptyCnt = experiences.reduce( (acc, curr) => (
             (!curr.role || !curr.company || !curr.startDate) ? acc+1 : acc
@@ -39,20 +45,24 @@ export const addExperiences = async(req, res) => {
                 role : experience.role.trim(),
                 company : experience.company.trim(),
                 description : experience.description ? experience.description : undefined,
+                location : experience.location,
                 startDate,
                 endDate,
                 userId : user.id
         }});
 
-        const addeddExperience = await db.experience.createMany( {
-            data : formattedExperience,
-            skipDuplicates : true
-        });
+        const createdExperience = await Promise.all(
+            formattedExperience.map((exp) => 
+                db.experience.create({
+                    data : exp
+                })
+            )
+        );
 
         return res.status(200).json( {
             success : true,
             message : "Experience addedd successfully",
-            addeddExperience
+            experiences : createdExperience
         })
 
     } catch (error) {
@@ -70,7 +80,7 @@ export const updateExperience = async(req, res) => {
         const userId = req.user.id;
         const experienceId = req.params.id;
 
-        const { role, company, description, startDate, endDate } = req.body;
+        const { role, company, description, startDate, endDate, location } = req.body;
 
         const existingExperience = await db.experience.findFirst( {
             where : {
@@ -97,9 +107,10 @@ export const updateExperience = async(req, res) => {
             }, data : {
                 ...(role && {role : role.trim()}),
                 ...(company && {company : company.trim()}),
+                ...(location && {location : location.trim()}),
                 ...(description && {description : description}),
-                ...(startDate && {startDate : startDate}),
-                ...(endDate && {endDate : endDate})
+                ...(startDate && {startDate : formatToISO(startDate)}),
+                ...(endDate && {endDate : formatToISO(endDate)})
             }
         })
 
@@ -110,6 +121,7 @@ export const updateExperience = async(req, res) => {
         })
 
     } catch (error) {
+        
         return res.status(500).json( {
             success : false,
             message : "Error updating experience",
