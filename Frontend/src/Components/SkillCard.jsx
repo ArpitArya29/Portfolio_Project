@@ -10,7 +10,7 @@ const SkillCard = ({ skill, onEdit }) => {
   };
 
   return (
-    <div className="bg-base-300 rounded-xl shadow-sm p-6 flex justify-between transition hover:shadow-md duration-200">
+    <div className="bg-base-100 rounded-xl shadow-sm p-6 flex justify-between transition hover:shadow-md duration-200">
       <div>
         <h2 className="font-semibold text-xl">
           {skill.name?.charAt(0).toUpperCase() + skill.name?.slice(1)}

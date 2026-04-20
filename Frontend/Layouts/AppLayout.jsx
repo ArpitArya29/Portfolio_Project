@@ -14,7 +14,7 @@ const AppLayout = () => {
       <div className="flex-1 flex flex-col w-full">
         <Navbar />
 
-        <main className="flex-1 w-full p-4 overflow-y-auto bg-base-200">
+        <main className="flex-1 w-full p-4 overflow-y-auto bg-base-300">
           <Outlet />
         </main>
       </div>
