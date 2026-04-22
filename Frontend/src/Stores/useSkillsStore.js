@@ -18,7 +18,6 @@ export const useSkillsStore = create( (set, get) => ({
             set( {allSkills : response.data.skills} )
 
         } catch (error) {
-            console.log("Error fetching skills", error.response?.data);
             toast.error("Error fetching skills")
 
         } finally {
@@ -36,7 +35,6 @@ export const useSkillsStore = create( (set, get) => ({
             set( { allSkills : [...allSkills, ...response.data.skills] })
 
         } catch (error) {
-            console.log("Error adding skills", error.response?.data?.message);
             toast.error("Error adding skills");
 
         } finally {
@@ -58,8 +56,15 @@ export const useSkillsStore = create( (set, get) => ({
             set( { allSkills : updatedSkills } )
 
         } catch (error) {
-            console.log("Error updating skill", error.response?.data?.message);
-            toast.error("Error updating skill")
+
+            if(error.response?.status === 400) {
+                toast("No changes to save", {
+                    icon: "⚠️",
+                });
+            } else {
+
+                toast.error("Error updating skill")
+            }
             
         } finally {
             set( { isUpdatingSkill : false } )
@@ -79,7 +84,6 @@ export const useSkillsStore = create( (set, get) => ({
             set( { allSkills : updatedSkills } )
 
         } catch (error) {
-            console.log("Error deleting skills", error.response?.data?.message);
             toast.error("Error deleting skill")
             
         } finally {

@@ -18,7 +18,6 @@ export const useExperienceStore = create((set, get) => ({
             set({ allExperiences : response.data.experiences });
 
         } catch (error) {
-            console.log("Error fetching experiences", error.response.data.message);
             toast.error( error.response?.data?.message || "Error fetching experiences");
 
         } finally {
@@ -37,7 +36,6 @@ export const useExperienceStore = create((set, get) => ({
             set({ allExperiences : [...allExperiences, ...response.data.experiences] });
            
         } catch (error) {
-            console.log("error adding experiences", error);
             toast.error(error.response?.data?.message || "Error adding Experience");
 
         } finally {
@@ -60,8 +58,13 @@ export const useExperienceStore = create((set, get) => ({
             set({ allExperiences : updatedExperience });
 
         } catch (error) {
-            console.log("Error updating experince", error.response.data);
-            toast.error(error.response?.data?.message || "Error updating experience");
+            if(error.response?.status === 400) {
+                toast("No changes to save", {
+                    icon: "⚠️",
+                });
+            } else {
+                toast.error(error.response?.data?.message || "Error updating experience");
+            }
 
         } finally {
             set({ isUpdatingExperience : false });
@@ -79,7 +82,6 @@ export const useExperienceStore = create((set, get) => ({
             set({ allExperiences : allExperiences.filter((exp) => exp.id !== id) })
 
         } catch (error) {
-            console.log("Error deleting experience", error.response.data);
             toast.error(error.response?.data?.message || "Error deleting experience");
 
         } finally {
