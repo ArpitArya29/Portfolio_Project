@@ -31,15 +31,23 @@ export const addProjects = async(req, res) => {
             })
         }
 
-        const addedProjects = await db.project.createMany({
-            data : formattedProject,
-            skipDuplicates : true
-        })
+        // const addedProjects = await db.project.createMany({
+        //     data : formattedProject,
+        //     skipDuplicates : true
+        // })
+
+        const createdProjects = await Promise.all(
+            formattedProject.map((proj)=> 
+                db.project.create({
+                    data : proj
+                })
+            )
+        )
 
         return res.status(200).json({
             success : true,
             message : "Projects Added successfully",
-            addedProjects
+            addedProjects : createdProjects
         })
 
     } catch (error) {
@@ -72,7 +80,12 @@ export const updateProject = async(req, res) => {
             })
         }
 
-        if(!title && !description && !github_link && !live_link) {
+        if(
+            (title!==undefined && title === existingProject.title) && 
+            (description!==undefined && description === existingProject.description) && 
+            (github_link!==undefined && github_link === existingProject.github_link) && 
+            (live_link!==undefined && live_link === existingProject.live_link)
+        ) {
             return res.status(400).json( {
                 message : "Nothing to update"
             })
@@ -82,10 +95,10 @@ export const updateProject = async(req, res) => {
             where : {
                 id : existingProject.id
             }, data : {
-                ...(title && {title : title.trim()}),
-                ...(description && {description : description}),
-                ...(github_link && {github_link : github_link}),
-                ...(live_link && {live_link : live_link})
+                ...(title!==undefined && {title : title.trim()}),
+                ...(description!==undefined && {description : description}),
+                ...(github_link!==undefined && {github_link : github_link}),
+                ...(live_link!==undefined && {live_link : live_link})
             }
         })
 
@@ -110,12 +123,18 @@ export const deleteProject = async(req, res) => {
         const userId = req.user.id;
         const projectId = req.params.id;
 
+        console.log(projectId);
+        
+
         const existingProject = await db.project.findFirst( {
             where : {
                 id : projectId,
                 userId
             }
         });
+
+        console.log(existingProject);
+        
 
         if(!existingProject) {
             return res.status(404).json( {

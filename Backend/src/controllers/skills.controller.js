@@ -61,7 +61,10 @@ export const updateSkill = async(req, res) => {
             })
         }
 
-        if(!name && !proficiency) {
+        if(
+            ( name !== undefined && name === skill.name) && 
+            ( proficiency !== undefined && proficiency === skill.proficiency)
+        ) {
             return res.status(400).json({
                 message : "Nothing to update"
             })

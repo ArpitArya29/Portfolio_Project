@@ -95,7 +95,14 @@ export const updateExperience = async(req, res) => {
             })
         }
 
-        if(!role && !company && !description && !startDate && !endDate) {
+        if(
+            ( role!==undefined && role===existingExperience.role) &&
+            ( company!==undefined && company===existingExperience.company ) &&
+            ( location!==undefined && location===existingExperience.location ) &&
+            ( description!==undefined && description===existingExperience.description) &&
+            ( startDate!==undefined && formatToISO(startDate) === formatToISO(existingExperience.startDate)) &&
+            ( endDate!==undefined && formatToISO(endDate) === formatToISO(existingExperience.endDate))
+        ) {
             return res.status(400).json( {
                 message : "Nothing to update"
             })
@@ -105,12 +112,12 @@ export const updateExperience = async(req, res) => {
             where : {
                 id : existingExperience.id
             }, data : {
-                ...(role && {role : role.trim()}),
-                ...(company && {company : company.trim()}),
-                ...(location && {location : location.trim()}),
-                ...(description && {description : description}),
-                ...(startDate && {startDate : formatToISO(startDate)}),
-                ...(endDate && {endDate : formatToISO(endDate)})
+                ...(role!==undefined && {role : role.trim()}),
+                ...(company!==undefined && {company : company.trim()}),
+                ...(location!==undefined && {location : location.trim()}),
+                ...(description!==undefined && {description : description}),
+                ...(startDate!==undefined && {startDate : formatToISO(startDate)}),
+                ...(endDate!==undefined && {endDate : formatToISO(endDate)})
             }
         })
 
