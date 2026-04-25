@@ -205,6 +205,11 @@ export const getAllPortfolios = async(req, res) => {
         const allPortfolios = await db.portfolio.findMany( {
             where : {
                 userId
+            }, 
+            include : {
+                skills: true,
+                experiences : true,
+                projects : true
             }
         })
 
