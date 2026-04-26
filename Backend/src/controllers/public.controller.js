@@ -6,7 +6,7 @@ export const getPortfolioById = async(req, res) => {
 
         const portfolio = await db.portfolio.findUnique( {
             where : {
-                id : Number(portfolioId)
+                publicId : portfolioId
             }, include : {
                 skills : true,
                 experiences : true,

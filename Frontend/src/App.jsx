@@ -14,6 +14,7 @@ import SkillSPage from "./Pages/SkillSPage";
 import ExperiencePage from "./Pages/ExperiencePage";
 import ProjectPage from "./Pages/ProjectPage";
 import PortfolioPage from "./Pages/PortfolioPage";
+import UserPortfolioPage from "./Pages/UserPortfolioPage";
 
 const App = () => {
   const { authUser, isCheckingAuth, checkAuth, logout } = useAuthStore();
@@ -67,6 +68,8 @@ const App = () => {
           <Route path="projects" element={<ProjectPage />} />
           <Route path="portfolios" element={<PortfolioPage />} />
         </Route>
+
+        <Route path="/portfolio/:publicId" element={<UserPortfolioPage/>}/>
       </Routes>
     </div>
   );
