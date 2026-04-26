@@ -11,10 +11,6 @@ const ExperiencePage = () => {
   const [openModel, setOpenModel] = useState(false);
   const [editExperience, setEditExperience] = useState(null);
 
-  useEffect(() => {
-    getAllExperiences();
-  }, []);
-
   if (isFetchingExperience) {
     return (
       <div className="flex items-center justify-center">
@@ -22,6 +18,7 @@ const ExperiencePage = () => {
       </div>
     );
   }
+
   return (
     <div className="space-y-6 w-full">
       {/* Header */}

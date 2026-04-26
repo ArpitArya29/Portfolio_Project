@@ -10,10 +10,6 @@ const SkillSPage = () => {
   const [openModel, setOpenModel] = useState(false);
   const [editSkill, setEditSkill] = useState(null);
 
-  useEffect(() => {
-    getAllSkills();
-  }, []);
-
   if (isFetchingSkills) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -21,6 +17,7 @@ const SkillSPage = () => {
       </div>
     );
   }
+
   return (
     <div className="space-y-6 w-full">
       {/* Header */}

@@ -31,7 +31,7 @@ App.use("/api/v1/user", userRouter);
 App.use("/api/v1/user/skills", skillRouter);
 App.use("/api/v1/user/projects", projectRouter);
 App.use("/api/v1/user/experiences", experienceRouter);
-App.use("/api/v1/user/portfolios", portfolioRouter);
+App.use("/api/v1/user/portfolio", portfolioRouter);
 App.use("/api/v1/public/portfolio", publicRouter);
 
 // App.use("/", (req, res) => {

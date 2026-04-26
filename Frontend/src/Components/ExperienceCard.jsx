@@ -57,7 +57,7 @@ const ExperienceCard = ({ experience, onEdit }) => {
           >
             <Pencil
               size={18}
-              className="text-gray-500 transition-all duration-200 group-hover:text-blue-500 group-hover:fill-blue-500"
+              className="text-blue-400 transition-all duration-200 group-hover:text-blue-600"
             />
           </button>
 
@@ -71,7 +71,7 @@ const ExperienceCard = ({ experience, onEdit }) => {
           >
             <Trash
               size={18}
-              className="text-red-500 transition-all duration-200 group-hover:fill-red-500"
+              className="text-red-400 transition-all duration-200 group-hover:text-red-600"
             />
           </button>
         </div>

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../Stores/useAuthStore";
+
+import img1 from "../assets/portlio_image_e.png";
+import img2 from "../assets/portlio_image_exp.png";
+
 import {
   Briefcase,
   Code,
@@ -35,7 +39,10 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
     >
       <div>
         {/* Toggle */}
-        <div className="flex justify-end mb-6 ">
+        <div className="flex justify-end mb-6 shadow-sm transition-all duration-300">
+          <img src={ isExpanded ? img2 : img1} alt="logo_Image" className={`transition-all duration-300 ${isExpanded ? "px-3 py-2" : "p-2"}`}/>
+
+          
           <button onClick={() => setIsExpanded(!isExpanded)}>
             {isExpanded ? (
               <ChevronLeft className="text-white hover:text-blue-500" />

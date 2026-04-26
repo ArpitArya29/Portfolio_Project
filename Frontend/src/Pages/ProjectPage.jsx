@@ -10,10 +10,6 @@ const ProjectPage = () => {
   const [openModel, setOpenModel] = useState(false);
   const [editProject, setEditProject] = useState(null);
 
-  useEffect(() => {
-    getAllProjects();
-  }, []);
-
   if (isFetchingProjects) {
     return (
       <div className="flex items-center justify-center">
@@ -21,6 +17,7 @@ const ProjectPage = () => {
       </div>
     );
   }
+
   return (
     <div className="space-y-6 w-full">
       {/* Header */}

@@ -24,7 +24,7 @@ const ProjectCard = ({ project, onEdit }) => {
           <button onClick={() => onEdit()} className="group p-2">
             <Pencil
               size={18}
-              className="text-gray-500 transition-all duration-200 group-hover:text-blue-500 group-hover:fill-blue-500"
+              className="text-blue-400 transition-all duration-200 group-hover:text-blue-600"
             />
           </button>
 
@@ -37,7 +37,7 @@ const ProjectCard = ({ project, onEdit }) => {
           >
             <Trash
               size={18}
-              className="text-red-500 transition-all duration-200 group-hover:fill-red-500"
+              className="text-red-400 transition-all duration-200 group-hover:text-red-600"
             />
           </button>
         </div>
@@ -55,8 +55,7 @@ const ProjectCard = ({ project, onEdit }) => {
                 href={project.live_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-blue-600 
-                       hover:text-blue-700 transition"
+                className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition"
               >
                 <ExternalLink size={16} />
                 Live Demo
@@ -68,8 +67,7 @@ const ProjectCard = ({ project, onEdit }) => {
                 href={project.github_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm font-medium text-blue-600 
-                       hover:text-blue-700 transition"
+                className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 transition"
               >
                 <FileCode size={18} />
                 Code files

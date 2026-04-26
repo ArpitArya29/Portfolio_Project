@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useExperienceStore } from "../Stores/useExperienceStore";
+import { Trash2 } from "lucide-react";
 
 const ExperienceModel = ({ editExperience, onClose }) => {
   const {
@@ -44,115 +45,143 @@ const ExperienceModel = ({ editExperience, onClose }) => {
     onClose();
   };
 
+  const handleRemove = (removeIndex) => {
+    const filteredExperiences = experience.filter(
+      (exp, index) => index !== removeIndex,
+    );
+
+    setExperience(filteredExperiences);
+  };
+
   const formatDate = (date) => {
     if (!date) return "";
     return new Date(date).toLocaleDateString("en-CA");
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
-      <div className="bg-base-200 p-6 rounded-lg w-180 space-y-4 ">
-        <h2 className="text-lg font-semibold">
-          {editExperience ? "Edit Experience" : "Add Experiences"}
-        </h2>
+    <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
+      <div className="bg-base-200 p-6 rounded-lg w-180 space-y-4 max-h-[90vh] flex flex-col">
+        <div className="p-4 border-b">
+          <h2 className="text-lg font-semibold">
+            {editExperience ? "Edit Experience" : "Add Experiences"}
+          </h2>
+        </div>
 
-        {experience.map((exp, index) => (
-          <div
-            key={index}
-            className="bg-base-100 grid grid-cols-3 grid-rows-3 gap-4 p-6 rounded-lg"
-          >
-            <div className="col-start-1 row-start-1">
-              <label className="label">
-                <span className="label-text font-medium">Company</span>
-              </label>
-              <input
-                value={exp.company}
-                onChange={(e) => handleChange(index, "company", e.target.value)}
-                placeholder="Company"
-                className="input input-bordered w-full"
-              />
+        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          {experience.map((exp, index) => (
+            <div key={index} className="bg-base-100  p-6 rounded-lg">
+              <div className="text-end pr-2">
+                <button
+                  onClick={() => handleRemove(index)}
+                  className="text-sm px-2 hover:cursor-pointer"
+                >
+                  <Trash2 size={16} />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-3 grid-rows-3 gap-4">
+                <div className="col-start-1 row-start-1">
+                  <label className="label">
+                    <span className="label-text font-medium">Company</span>
+                  </label>
+                  <input
+                    value={exp.company}
+                    onChange={(e) =>
+                      handleChange(index, "company", e.target.value)
+                    }
+                    placeholder="Company"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                <div className="col-start-2 row-start-1 col-span-2 row-span-2 flex flex-col">
+                  <label className="label">
+                    <span className="label-text font-medium">Description</span>
+                  </label>
+                  <input
+                    value={exp.description}
+                    onChange={(e) =>
+                      handleChange(index, "description", e.target.value)
+                    }
+                    placeholder="Description"
+                    className="textarea textarea-bordered w-full flex-1"
+                  />
+                </div>
+
+                <div className="col-start-1 row-start-2">
+                  <label className="label">
+                    <span className="label-text font-medium">Role</span>
+                  </label>
+                  <input
+                    value={exp.role}
+                    onChange={(e) =>
+                      handleChange(index, "role", e.target.value)
+                    }
+                    placeholder="Role"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                <div className="col-start-1 row-start-3">
+                  <label className="label">
+                    <span className="label-text font-medium">Location</span>
+                  </label>
+                  <input
+                    value={exp.location}
+                    onChange={(e) =>
+                      handleChange(index, "location", e.target.value)
+                    }
+                    placeholder="Location"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                <div className="col-start-2 row-start-3">
+                  <label className="label">
+                    <span className="label-text font-medium">Start Date</span>
+                  </label>
+                  <input
+                    type="date"
+                    value={formatDate(exp.startDate)}
+                    onChange={(e) =>
+                      handleChange(index, "startDate", e.target.value)
+                    }
+                    placeholder="startDate"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                <div className="col-start-3 row-start-3">
+                  <label className="label">
+                    <span className="label-text font-medium">End Date</span>
+                  </label>
+                  <input
+                    type="date"
+                    value={formatDate(exp.endDate)}
+                    onChange={(e) =>
+                      handleChange(index, "endDate", e.target.value)
+                    }
+                    placeholder="endDate"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+              </div>
             </div>
+          ))}
+        </div>
 
-            <div className="col-start-2 row-start-1 col-span-2 row-span-2 flex flex-col">
-              <label className="label">
-                <span className="label-text font-medium">Description</span>
-              </label>
-              <input
-                value={exp.description}
-                onChange={(e) =>
-                  handleChange(index, "description", e.target.value)
-                }
-                placeholder="Description"
-                className="textarea textarea-bordered w-full flex-1"
-              />
-            </div>
+        <div className="p-4">
+          {!editExperience && (
+            <button
+              onClick={addMore}
+              className="text-blue-600 hover:cursor-pointer hover: underline"
+            >
+              + Add More
+            </button>
+          )}
+        </div>
 
-            <div className="col-start-1 row-start-2">
-              <label className="label">
-                <span className="label-text font-medium">Role</span>
-              </label>
-              <input
-                value={exp.role}
-                onChange={(e) => handleChange(index, "role", e.target.value)}
-                placeholder="Role"
-                className="input input-bordered w-full"
-              />
-            </div>
-
-            <div className="col-start-1 row-start-3">
-              <label className="label">
-                <span className="label-text font-medium">Location</span>
-              </label>
-              <input
-                value={exp.location}
-                onChange={(e) =>
-                  handleChange(index, "location", e.target.value)
-                }
-                placeholder="Location"
-                className="input input-bordered w-full"
-              />
-            </div>
-
-            <div className="col-start-2 row-start-3">
-              <label className="label">
-                <span className="label-text font-medium">Start Date</span>
-              </label>
-              <input
-                type="date"
-                value={formatDate(exp.startDate)}
-                onChange={(e) =>
-                  handleChange(index, "startDate", e.target.value)
-                }
-                placeholder="startDate"
-                className="input input-bordered w-full"
-              />
-            </div>
-
-            <div className="col-start-3 row-start-3">
-              <label className="label">
-                <span className="label-text font-medium">End Date</span>
-              </label>
-              <input
-                type="date"
-                value={formatDate(exp.endDate)}
-                onChange={(e) => handleChange(index, "endDate", e.target.value)}
-                placeholder="endDate"
-                className="input input-bordered w-full"
-              />
-            </div>
-          </div>
-        ))}
-
-        {!editExperience && (
-          <button
-            onClick={addMore}
-            className="text-blue-600 hover:cursor-pointer hover: underline"
-          >
-            + Add More
-          </button>
-        )}
-
-        <div className="flex justify-end gap-2">
+        <div className="p-4 border-t border-gray-200 flex justify-end gap-2 bg-base-200">
           <button
             onClick={onClose}
             className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md transition-colors"

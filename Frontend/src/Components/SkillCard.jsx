@@ -23,9 +23,9 @@ const SkillCard = ({ skill, onEdit }) => {
       <div className="flex gap-2">
         <button
           onClick={onEdit}
-          className="p-2  text-blue-500 transition-colors duration-200 hover:text-blue-400 "
+          className="p-2  text-blue-400 transition-colors duration-200 hover:text-blue-600 "
         >
-          <Pencil size={18} className="hover:fill-blue-500" />
+          <Pencil size={18} />
         </button>
 
         <button
@@ -33,7 +33,7 @@ const SkillCard = ({ skill, onEdit }) => {
           onClick={() => deleteSkill(skill.id)}
           className="p-2  text-red-400 transition-colors duration-200 hover:text-red-600"
         >
-          <Trash size={18} className="hover:fill-red-500" />
+          <Trash size={18} />
         </button>
       </div>
     </div>

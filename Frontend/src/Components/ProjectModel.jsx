@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useProjectStore } from "../Stores/useProjectStore";
+import { Trash2 } from "lucide-react";
 
 const ProjectModel = ({ editProject, onClose }) => {
   const { addProjects, isAddingProject, updateProject, isUpdatingProject } =
@@ -29,8 +30,6 @@ const ProjectModel = ({ editProject, onClose }) => {
       (project) => project.title.trim() !== "",
     );
 
-    console.log(filteredProjects);
-
     if (editProject) {
       await updateProject(filteredProjects[0], editProject.id);
     } else {
@@ -41,83 +40,99 @@ const ProjectModel = ({ editProject, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
-      <div className="bg-base-200 p-6 rounded-lg space-y-4">
-        <h2 className="text-lg font-semibold">
-          {editProject ? "Edit Project" : "Add Projects"}
-        </h2>
+    <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
+      <div className="bg-base-200 p-6 rounded-lg space-y-4 w-200 max-h-[90vh] flex flex-col">
+        <div className="p-4 border-b">
+          <h2 className="text-lg font-semibold">
+            {editProject ? "Edit Project" : "Add Projects"}
+          </h2>
+        </div>
 
-        {project.map((proj, index) => (
-          <div
-            key={index}
-            className="bg-base-100 grid grid-cols-5 grid-rows-3 gap-4 p-6 rounded-lg"
-          >
-            <div className="col-start-1 row-start-1 col-span-2">
-              <label className="label">
-                <span className="label-text font-medium">Title</span>
-              </label>
-              <input
-                value={proj.title}
-                onChange={(e) => handleChange(index, "title", e.target.value)}
-                placeholder="Title"
-                className="input input-bordered w-full"
-              />
+        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          {project.map((proj, index) => (
+            <div key={index} className="bg-base-100  p-6 rounded-lg">
+              <div className="text-end pr-2">
+                <button
+                  onClick={() => handleRemove(index)}
+                  className="text-sm px-2 hover:cursor-pointer"
+                >
+                  <Trash2 size={16} />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-5 grid-rows-3 gap-4">
+                <div className="col-start-1 row-start-1 col-span-2">
+                  <label className="label">
+                    <span className="label-text font-medium">Title</span>
+                  </label>
+                  <input
+                    value={proj.title}
+                    onChange={(e) =>
+                      handleChange(index, "title", e.target.value)
+                    }
+                    placeholder="Title"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                <div className="col-start-3 row-start-1 col-span-3 row-span-3 flex flex-col">
+                  <label className="label">
+                    <span className="label-text font-medium">Description</span>
+                  </label>
+                  <input
+                    value={proj.description}
+                    onChange={(e) =>
+                      handleChange(index, "description", e.target.value)
+                    }
+                    placeholder="Description"
+                    className="textarea textarea-bordered w-full h-full align-top pt-2"
+                  />
+                </div>
+
+                <div className="col-start-1 row-start-2 col-span-2">
+                  <label className="label">
+                    <span className="label-text font-medium">Live Link</span>
+                  </label>
+                  <input
+                    value={proj.live_link}
+                    onChange={(e) =>
+                      handleChange(index, "live_link", e.target.value)
+                    }
+                    placeholder="Live Link"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                <div className="col-start-1 row-start-3 col-span-2">
+                  <label className="label">
+                    <span className="label-text font-medium">Github Link</span>
+                  </label>
+                  <input
+                    value={proj.github_link}
+                    onChange={(e) =>
+                      handleChange(index, "github_link", e.target.value)
+                    }
+                    placeholder="Guthub Link"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+              </div>
             </div>
+          ))}
+        </div>
 
-            <div className="col-start-3 row-start-1 col-span-3 row-span-3 flex flex-col">
-              <label className="label">
-                <span className="label-text font-medium">Description</span>
-              </label>
-              <input
-                value={proj.description}
-                onChange={(e) =>
-                  handleChange(index, "description", e.target.value)
-                }
-                placeholder="Description"
-                className="textarea textarea-bordered w-full h-full align-top pt-2"
-              />
-            </div>
+        <div className="p-4">
+          {!editProject && (
+            <button
+              onClick={addMore}
+              className="text-blue-600 hover:cursor-pointer hover: underline"
+            >
+              + Add More
+            </button>
+          )}
+        </div>
 
-            <div className="col-start-1 row-start-2 col-span-2">
-              <label className="label">
-                <span className="label-text font-medium">Live Link</span>
-              </label>
-              <input
-                value={proj.live_link}
-                onChange={(e) =>
-                  handleChange(index, "live_link", e.target.value)
-                }
-                placeholder="Live Link"
-                className="input input-bordered w-full"
-              />
-            </div>
-
-            <div className="col-start-1 row-start-3 col-span-2">
-              <label className="label">
-                <span className="label-text font-medium">Github Link</span>
-              </label>
-              <input
-                value={proj.github_link}
-                onChange={(e) =>
-                  handleChange(index, "github_link", e.target.value)
-                }
-                placeholder="Guthub Link"
-                className="input input-bordered w-full"
-              />
-            </div>
-          </div>
-        ))}
-
-        {!editProject && (
-          <button
-            onClick={addMore}
-            className="text-blue-600 hover:cursor-pointer hover: underline"
-          >
-            + Add More
-          </button>
-        )}
-
-        <div className="flex justify-end gap-2">
+        <div className="p-4 border-t border-gray-500 flex justify-end gap-2 bg-base-200">
           <button
             onClick={onClose}
             className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium rounded-md transition-colors"
