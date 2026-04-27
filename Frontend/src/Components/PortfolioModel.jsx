@@ -89,38 +89,38 @@ const PortfolioModel = ({ editPortfolio, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
-      <div className="bg-base-200 w-150 max-h-[90vh] flex flex-col rounded-xl">
-        <div className="p-4 border-b">
-          <h2 className="text-lg font-semibold">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50">
+      <div className="bg-slate-900 border border-white/10 w-full max-w-4xl max-h-[90vh] flex flex-col rounded-2xl shadow-2xl">
+        <div className="p-4 border-b border-white/10">
+          <h2 className="text-lg font-semibold text-white">
             {editPortfolio ? "Edit Portfolio" : "Create Portfolio"}
           </h2>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
           <div>
-            <label className="label">
-              <span className="label-text font-medium">Portfolio Title</span>
+            <label className="block text-sm font-medium text-slate-300 mb-2">
+              Portfolio Title
             </label>
 
             <input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter Portfolio Title"
-              className="input input-bordered w-full bg-base-100"
+              className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none transition-colors"
             />
           </div>
 
           <div>
-            <label className="label">
-              <span className="label-text font-medium">Bio</span>
+            <label className="block text-sm font-medium text-slate-300 mb-2">
+              Bio
             </label>
 
             <textarea
               value={bio}
               onChange={(e) => setBio(e.target.value)}
               placeholder="Write a short bio..."
-              className="textarea textarea-bordered w-full min-h-24 bg-base-100"
+              className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none transition-colors min-h-24 resize-none"
             />
           </div>
 
@@ -146,11 +146,16 @@ const PortfolioModel = ({ editPortfolio, onClose }) => {
           />
         </div>
 
-        <div className="p-4 border-t flex justify-end gap-2">
-          <button onClick={onClose}>Cancel</button>
+        <div className="p-4 border-t border-white/10 flex justify-end gap-2 bg-slate-800/50 rounded-b-2xl">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-medium rounded-lg transition-colors"
+          >
+            Cancel
+          </button>
           <button
             onClick={handleSubmit}
-            className="bg-blue-600 text-white px-4 py-2 rounded"
+            className="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-colors"
           >
             Save
           </button>

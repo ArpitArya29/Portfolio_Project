@@ -21,8 +21,10 @@ const SkillsBarChart = ({ skills }) => {
   console.log(data);
 
   return (
-    <div className="bg-base-100 border border-base-300 p-8 rounded-xl h-96 flex flex-col justify-center items-center">
-      <h2 className="font-semibold mb-3 text-lg">Skill Proficiency</h2>
+    <div className="bg-slate-950 border border-white/10 p-8 rounded-xl h-96 flex flex-col justify-center items-center shadow-inner shadow-black/20">
+      <h2 className="font-semibold mb-3 text-lg text-white">
+        Skill Proficiency
+      </h2>
 
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data}>

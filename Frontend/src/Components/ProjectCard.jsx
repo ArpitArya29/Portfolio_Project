@@ -6,25 +6,26 @@ const ProjectCard = ({ project, onEdit }) => {
   const { deleteProject, isDeletingProject } = useProjectStore();
 
   return (
-    <div className="bg-base-100 rounded-xl shadow-sm p-5 transition-all duration-300 hover:shadow-md cursor-pointer">
+    <div className="bg-white/5 border border-white/10 rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:bg-white/10 cursor-pointer flex flex-col min-h-56 max-h-72">
       {/* Top section */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h2 className="text-2xl font-semibold text-white-800">
-            {project.title}
-          </h2>
+      <div className="flex justify-between items-start">
+        <div className="flex-1">
+          <h2 className="text-2xl font-semibold text-white">{project.title}</h2>
 
-          <p className="text-sm text-gray-400 mt-2 line-clamp-3">
+          <p className="text-sm text-slate-300 mt-2 line-clamp-3 overflow-hidden">
             {project.description}
           </p>
         </div>
 
         {/* Actions */}
-        <div className="flex gap-2">
-          <button onClick={() => onEdit()} className="group p-2">
+        <div className="flex gap-2 ml-4">
+          <button
+            onClick={() => onEdit()}
+            className="group p-2 rounded-lg hover:bg-white/5 transition-colors"
+          >
             <Pencil
               size={18}
-              className="text-blue-400 transition-all duration-200 group-hover:text-blue-600"
+              className="text-orange-400 transition-all duration-200 group-hover:text-orange-300"
             />
           </button>
 
@@ -33,29 +34,29 @@ const ProjectCard = ({ project, onEdit }) => {
             onClick={() => {
               deleteProject(project.id);
             }}
-            className="group p-2"
+            className="group p-2 rounded-lg hover:bg-white/5 transition-colors"
           >
             <Trash
               size={18}
-              className="text-red-400 transition-all duration-200 group-hover:text-red-600"
+              className="text-red-400 transition-all duration-200 group-hover:text-red-300"
             />
           </button>
         </div>
       </div>
 
       {/* Links */}
-      <div className="border-t border-gray-500 pt-4 mt-4 text-sm font-medium">
+      <div className="mt-auto border-t border-white/10 pt-4">
         {!(project.live_link || project.github_link) ? (
-          <div className="text-center text-yellow-600">No any links added</div>
+          <div className="text-center text-yellow-400 py-2">No links added</div>
         ) : (
-          <div className="flex items-center justify-around  gap-4 ">
+          <div className="flex items-center justify-center gap-6">
             {/* Live Link */}
             {project.live_link && (
               <a
                 href={project.live_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-blue-600 hover:text-blue-700 transition"
+                className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors font-medium"
               >
                 <ExternalLink size={16} />
                 Live Demo
@@ -67,10 +68,10 @@ const ProjectCard = ({ project, onEdit }) => {
                 href={project.github_link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm font-medium text-blue-600 hover:text-blue-700 transition"
+                className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors font-medium"
               >
                 <FileCode size={18} />
-                Code files
+                Code
               </a>
             )}
           </div>

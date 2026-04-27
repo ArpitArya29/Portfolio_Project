@@ -10,12 +10,12 @@ const SkillCard = ({ skill, onEdit }) => {
   };
 
   return (
-    <div className="bg-base-100 rounded-xl shadow-sm p-6 flex justify-between transition hover:shadow-md duration-200">
+    <div className="bg-white/5 border border-white/10 rounded-2xl shadow-lg p-6 flex justify-between transition-all duration-200 hover:shadow-xl hover:bg-white/10">
       <div>
-        <h2 className="font-semibold text-xl">
+        <h2 className="font-semibold text-xl text-white">
           {skill.name?.charAt(0).toUpperCase() + skill.name?.slice(1)}
         </h2>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-yellow-400">
           {renderStars(skill.proficiency)}
         </p>
       </div>
@@ -23,7 +23,7 @@ const SkillCard = ({ skill, onEdit }) => {
       <div className="flex gap-2">
         <button
           onClick={onEdit}
-          className="p-2  text-blue-400 transition-colors duration-200 hover:text-blue-600 "
+          className="p-2 text-cyan-400 transition-colors duration-200 hover:text-cyan-300 rounded-lg hover:bg-white/5"
         >
           <Pencil size={18} />
         </button>
@@ -31,7 +31,7 @@ const SkillCard = ({ skill, onEdit }) => {
         <button
           disabled={isDeletingSkill}
           onClick={() => deleteSkill(skill.id)}
-          className="p-2  text-red-400 transition-colors duration-200 hover:text-red-600"
+          className="p-2 text-red-400 transition-colors duration-200 hover:text-red-300 rounded-lg hover:bg-white/5"
         >
           <Trash size={18} />
         </button>

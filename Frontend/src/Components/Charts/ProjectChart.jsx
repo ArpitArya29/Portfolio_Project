@@ -11,36 +11,14 @@ const ProjectChart = ({ projects }) => {
   const livePercent = ((live / total) * 100).toFixed(1);
   const githubPercentage = ((github / total) * 100).toFixed(1);
 
-  // const data = [
-  //   {
-  //     name: "Total",
-  //     value: total,
-  //     color: "#6366F1",
-  //   },
-  //   {
-  //     name: "Live",
-  //     value: live,
-  //     color: "#22C55E",
-  //   },
-  //   {
-  //     name: "Github",
-  //     value: githib,
-  //     color: "#F59E0B",
-  //   },
-  // ];
   return (
-    <div className="bg-base-100 border border-base-300 p-8 rounded-2xl flex flex-col items-center h-96">
-      {/* Header */}
-      <div className="mb-4">
-        <h2 className="font-semibold text-lg">Project Overview</h2>
-      </div>
-
-      <div className="flex items-center justify-between gap-4">
+    <div className="bg-slate-950 border border-white/10  p-8 rounded-2xl flex flex-col items-center h-96 shadow-inner shadow-black/20">
+      <div className="flex flex-col lg:flex-row items-center justify-between gap-2">
         {/* left */}
         <ProjectOverviewChart projects={projects} />
 
         {/* right */}
-        <div className="space-y-6 w-72">
+        <div className="space-y-6 w-full lg:w-64 p-4 bg-white/5 rounded-xl border border-white/5 max-w-full overflow-hidden">
           <StatItem
             color="#6366F1"
             title="Total Projects"
@@ -65,27 +43,14 @@ const ProjectChart = ({ projects }) => {
             percent={githubPercentage}
           />
         </div>
-
-        {/* Legend */}
-        {/* <div className="space-y-3 text-sm">
-          {data.map((item, idx) => (
-            <div key={idx} className="flex items-center gap-2">
-              <div
-                className="w-3 h-3 rounded-sm"
-                style={{ backgroundColor: item.color }}
-              />
-              <span className="text-base-content/80">
-                {item.name} : {item.value}
-              </span>
-            </div>
-          ))}
-        </div> */}
       </div>
 
-      <div className="mt-6 p-4 bg-base-200 rounded-xl text-sm text-gray-300">
-        Nice! You have <span className="text-green-400">{live}</span> live
-        projects and <span className="text-yellow-400"> {github}</span> projects
-        on GitHub.
+      <div className="mt-6 p-4 bg-white/5 rounded-xl text-sm text-slate-300 border border-white/5">
+        Nice! You have{" "}
+        <span className="text-green-400 font-semibold">{live}</span> live
+        projects and{" "}
+        <span className="text-yellow-400 font-semibold"> {github}</span>{" "}
+        projects on GitHub.
       </div>
     </div>
   );

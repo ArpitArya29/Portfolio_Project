@@ -73,7 +73,7 @@ const ExperienceChart = ({ experiences }) => {
 
     const startOffset = ((payload.start - minYear) / totalRange) * fullWidth;
 
-    const barWidth = (payload.duration / totalRange) * fullWidth
+    const barWidth = (payload.duration / totalRange) * fullWidth;
 
     return (
       <rect
@@ -99,8 +99,10 @@ const ExperienceChart = ({ experiences }) => {
   const range = Math.max(maxYear - minYear, 1);
 
   return (
-    <div className="bg-base-100 border border-base-300 p-8 rounded-xl h-96 flex flex-col items-center">
-      <h2 className="font-semibold mb-3 text-lg">Experience Timeline</h2>
+    <div className="bg-slate-950 border border-white/10 p-8 rounded-xl h-96 flex flex-col items-center shadow-inner shadow-black/20">
+      <h2 className="font-semibold mb-3 text-lg text-white">
+        Experience Timeline
+      </h2>
 
       <ResponsiveContainer width="100%" height="100%">
         <BarChart layout="vertical" data={data}>

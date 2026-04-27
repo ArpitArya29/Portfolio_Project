@@ -11,11 +11,13 @@ const AppLayout = () => {
     <div className="flex h-screen w-full">
       <Sidebar isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
 
-      <div className="flex-1 flex flex-col w-full">
+      <div className="flex-1 flex flex-col w-full bg-slate-950">
         <Navbar />
 
-        <main className="flex-1 w-full p-4 overflow-y-auto bg-base-300">
-          <Outlet />
+        <main className="flex-1 w-full p-5 md:p-6 overflow-y-auto bg-slate-950">
+          <div className="min-h-full rounded-4xl border border-white/10 bg-white/5/10 p-5 shadow-[0_32px_80px_-40px_rgba(15,23,42,0.8)] backdrop-blur-xl">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>

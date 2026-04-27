@@ -25,8 +25,8 @@ const SkillsPieChart = ({ skills }) => {
 
   const COLORS = ["#6366F1", "#F59E0B", "#3F3F46"];
   return (
-    <div className="bg-base-100 border border-base-300 rounded-xl h-96 p-8 flex flex-col items-center justify-center">
-      <h2 className="font-semibold text-lg">Skill Distribution</h2>
+    <div className="bg-slate-950 border border-white/10 rounded-xl h-96 p-8 flex flex-col items-center justify-center shadow-inner shadow-black/20">
+      <h2 className="font-semibold text-lg text-white">Skill Distribution</h2>
       <div className="flex items-center justify-around">
         <PieChart width={300} height={300}>
           <Pie data={data} dataKey="value" outerRadius={100} stroke="none">
@@ -47,11 +47,11 @@ const SkillsPieChart = ({ skills }) => {
           {data.map((item, idx) => (
             <div
               key={idx}
-              className="flex items-center gap-2 px-4 text-center rounded-lg font-bold"
+              className="flex items-center gap-2 px-4 text-center rounded-lg font-bold text-white"
               style={{ backgroundColor: COLORS[idx] }}
             >
               <div className="w-3 h-3 rounded-sm" />
-              <span className="text-base-content/80">
+              <span>
                 {item.name} [{item.condition}] (
                 {Math.round((item.value / total) * 100)}%)
               </span>
