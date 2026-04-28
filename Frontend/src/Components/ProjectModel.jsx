@@ -13,7 +13,12 @@ const ProjectModel = ({ editProject, onClose }) => {
     live_link: editProject?.live_link || "",
   };
 
-  const [project, setProject] = useState([projectObject]);
+  const [project, setProject] = useState([
+    {
+      id: editProject?.id || crypto.randomUUID(),
+      ...projectObject,
+    },
+  ]);
 
   const handleChange = (index, field, value) => {
     const updated = [...project];
@@ -22,7 +27,15 @@ const ProjectModel = ({ editProject, onClose }) => {
   };
 
   const addMore = () => {
-    setProject([...project, projectObject]);
+    setProject([...project, { id: crypto.randomUUID(), ...projectObject }]);
+  };
+
+  const handleRemove = (removeIndex) => {
+    const filteredProjects = project.filter(
+      (proj, index) => index !== removeIndex,
+    );
+
+    setProject(filteredProjects);
   };
 
   const handleSubmit = async () => {
@@ -33,7 +46,8 @@ const ProjectModel = ({ editProject, onClose }) => {
     if (editProject) {
       await updateProject(filteredProjects[0], editProject.id);
     } else {
-      await addProjects({ projects: filteredProjects });
+      const projectsToSubmit = filteredProjects.map(({ id, ...rest }) => rest);
+      await addProjects({ projects: projectsToSubmit });
     }
 
     onClose();
@@ -51,7 +65,7 @@ const ProjectModel = ({ editProject, onClose }) => {
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {project.map((proj, index) => (
             <div
-              key={proj.title || index}
+              key={proj.id}
               className="bg-white/5 border border-white/10 p-6 rounded-xl"
             >
               <div className="text-end pr-2">

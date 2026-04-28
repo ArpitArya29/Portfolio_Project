@@ -19,7 +19,12 @@ const ExperienceModel = ({ editExperience, onClose }) => {
     endDate: editExperience?.endDate || "",
   };
 
-  const [experience, setExperience] = useState([experienceObject]);
+  const [experience, setExperience] = useState([
+    {
+      id: editExperience?.id || crypto.randomUUID(),
+      ...experienceObject,
+    },
+  ]);
 
   const handleChange = (index, field, value) => {
     const updated = [...experience];
@@ -28,7 +33,10 @@ const ExperienceModel = ({ editExperience, onClose }) => {
   };
 
   const addMore = () => {
-    setExperience([...experience, experienceObject]);
+    setExperience([
+      ...experience,
+      { id: crypto.randomUUID(), ...experienceObject },
+    ]);
   };
 
   const handleSubmit = async () => {
@@ -39,7 +47,8 @@ const ExperienceModel = ({ editExperience, onClose }) => {
     if (editExperience) {
       await updateExperience(filteredExperiences[0], editExperience.id);
     } else {
-      await addExperiences({ experiences: filteredExperiences });
+      const experiencesToSubmit = filteredExperiences.map(({ id, ...rest }) => rest);
+      await addExperiences({ experiences: experiencesToSubmit });
     }
 
     onClose();
@@ -70,7 +79,7 @@ const ExperienceModel = ({ editExperience, onClose }) => {
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {experience.map((exp, index) => (
             <div
-              key={exp.role || index}
+              key={exp.id}
               className="bg-white/5 border border-white/10 p-6 rounded-xl"
             >
               <div className="text-end pr-2">

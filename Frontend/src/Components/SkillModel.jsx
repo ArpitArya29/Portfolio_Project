@@ -8,8 +8,8 @@ const SkillModel = ({ editSkill, onClose }) => {
 
   const [skills, setSkills] = useState(
     editSkill
-      ? [{ name: editSkill.name, proficiency: editSkill.proficiency }]
-      : [{ name: "", proficiency: 1 }],
+      ? [{ id: editSkill.id, name: editSkill.name, proficiency: editSkill.proficiency }]
+      : [{ id: crypto.randomUUID(), name: "", proficiency: 1 }],
   );
 
   const handleChange = (index, field, value) => {
@@ -19,7 +19,7 @@ const SkillModel = ({ editSkill, onClose }) => {
   };
 
   const addMore = () => {
-    setSkills([...skills, { name: "", proficiency: 1 }]);
+    setSkills([...skills, { id: crypto.randomUUID(), name: "", proficiency: 1 }]);
   };
 
   const handleRemove = (removedIndex) => {
@@ -36,7 +36,8 @@ const SkillModel = ({ editSkill, onClose }) => {
     if (editSkill) {
       await updateSkill(filteredSkills[0], editSkill.id);
     } else {
-      await addSkills({ skills: filteredSkills });
+      const skillsToSubmit = filteredSkills.map(({ id, ...rest }) => rest);
+      await addSkills({ skills: skillsToSubmit });
     }
 
     onClose();
@@ -54,7 +55,7 @@ const SkillModel = ({ editSkill, onClose }) => {
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {skills.map((skill, index) => (
             <div
-              key={skill.name || index}
+              key={skill.id}
               className="bg-white/5 border border-white/10 rounded-xl p-4"
             >
               <div className="text-end pr-2">
