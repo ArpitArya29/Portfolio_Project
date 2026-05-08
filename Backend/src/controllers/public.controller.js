@@ -15,7 +15,10 @@ export const getPortfolioById = async(req, res) => {
                     select : {
                         name : true,
                         email : true,
-                        image : true
+                        image : true,
+                        linkedIn_url : true,
+                        github_url : true,
+                        phone_number : true
                     }
                 }
             }
