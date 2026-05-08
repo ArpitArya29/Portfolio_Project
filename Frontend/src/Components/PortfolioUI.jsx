@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, ExternalLink, Code, User } from "lucide-react";
 
@@ -334,31 +334,35 @@ const PortfolioUI = ({ portfolio }) => {
           >
             <div className="flex flex-wrap justify-center gap-6">
               {/* Social Links - Add your actual links */}
-              <motion.a
-                href={`https://github.com/${user?.githubUsername}`}
-                target="_blank"
-                rel="noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-base-200/50 backdrop-blur-md border border-base-content/5 hover:border-indigo-500/30 hover:bg-base-200 hover:shadow-[0_8px_30px_-5px_rgba(99,102,241,0.15)] transition-all group"
-              >
-                <Code className="w-6 h-6 text-indigo-400 group-hover:text-indigo-500" />
-                <span className="font-semibold text-base-content/90">
-                  GitHub
-                </span>
-              </motion.a>
+              {user?.github_url && (
+                <motion.a
+                  href={`${user.github_url}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-base-200/50 backdrop-blur-md border border-base-content/5 hover:border-indigo-500/30 hover:bg-base-200 hover:shadow-[0_8px_30px_-5px_rgba(99,102,241,0.15)] transition-all group"
+                >
+                  <Code className="w-6 h-6 text-indigo-400 group-hover:text-indigo-500" />
+                  <span className="font-semibold text-base-content/90">
+                    GitHub
+                  </span>
+                </motion.a>
+              )}
 
-              <motion.a
-                href={`https://linkedin.com/in/${user?.linkedinUsername}`}
-                target="_blank"
-                rel="noreferrer"
-                whileHover={{ scale: 1.1, y: -2 }}
-                className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-base-200/50 backdrop-blur-md border border-base-content/5 hover:border-indigo-500/30 hover:bg-base-200 hover:shadow-[0_8px_30px_-5px_rgba(99,102,241,0.15)] transition-all group"
-              >
-                <User className="w-6 h-6 text-indigo-400 group-hover:text-indigo-500" />
-                <span className="font-semibold text-base-content/90">
-                  LinkedIn
-                </span>
-              </motion.a>
+              {user?.linkedIn_url && (
+                <motion.a
+                  href={`${user.linkedIn_url}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-base-200/50 backdrop-blur-md border border-base-content/5 hover:border-indigo-500/30 hover:bg-base-200 hover:shadow-[0_8px_30px_-5px_rgba(99,102,241,0.15)] transition-all group"
+                >
+                  <User className="w-6 h-6 text-indigo-400 group-hover:text-indigo-500" />
+                  <span className="font-semibold text-base-content/90">
+                    LinkedIn
+                  </span>
+                </motion.a>
+              )}
 
               <motion.a
                 href={`mailto:${user?.email}`}

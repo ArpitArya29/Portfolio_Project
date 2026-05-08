@@ -26,7 +26,6 @@ const UserPortfolioPage = () => {
   }
 
   if (!portfolioData) {
-    // If no real data is found, show the UI with placeholder mock data for demonstration
     return (
       // <PortfolioUI />
       <div>
@@ -34,9 +33,6 @@ const UserPortfolioPage = () => {
       </div>
     );
   }
-
-  console.log(portfolioData);
-  
 
   return (
     <PortfolioUI portfolio={portfolioData} />
