@@ -8,8 +8,6 @@ dotenv.config()
 
 export const register = async(req, res) => {
     const {name, email, password} = req.body;
-
-    console.log(name, email, password);
     
     try {
         const existingUser = await db.user.findUnique({
@@ -26,8 +24,6 @@ export const register = async(req, res) => {
         if(req.file) {
             imagePath = await uploadOnClaudinary(req.file.path);
         }
-
-        console.log(process.env.HASHSALT);
         
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -36,13 +32,10 @@ export const register = async(req, res) => {
                 name,
                 email,
                 password : hashedPassword,
-                image : imagePath.url,
+                image : imagePath?.url,
             }
         })
-
-        console.log(newUser);
         
-
         return res.status(200).json({
             success : true,
             message : "User Registered Successfully",

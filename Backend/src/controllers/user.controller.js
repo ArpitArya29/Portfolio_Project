@@ -18,14 +18,13 @@ export const updateProfile = async(req, res) => {
         }
 
         const {name, linkedIn_url, github_url, phone_number} = req.body;
-        console.log(name, linkedIn_url, github_url, phone_number);
         
-
         if(
             (name === undefined || name === existingUser.name) &&
             (linkedIn_url === undefined || linkedIn_url === existingUser.linkedIn_url) && 
             (github_url === undefined || github_url === existingUser.github_url) &&
-            (phone_number === undefined || phone_number === existingUser.phone_number)
+            (phone_number === undefined || phone_number === existingUser.phone_number) &&
+            !req.file
         ) {
             return res.status(400).json({
                 messsage : "Nothing to change"
@@ -57,7 +56,6 @@ export const updateProfile = async(req, res) => {
         })
 
     } catch (error) {
-        console.log("Error updating user", error);
         res.status(500).json({
             success : false,
             message : " Error updating user",

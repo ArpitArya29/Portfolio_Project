@@ -123,18 +123,12 @@ export const deleteProject = async(req, res) => {
         const userId = req.user.id;
         const projectId = req.params.id;
 
-        console.log(projectId);
-        
-
         const existingProject = await db.project.findFirst( {
             where : {
                 id : projectId,
                 userId
             }
         });
-
-        console.log(existingProject);
-        
 
         if(!existingProject) {
             return res.status(404).json( {

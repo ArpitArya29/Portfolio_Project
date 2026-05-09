@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 import { db } from "../libs/db.js";
 export const authMiddleware = async(req, res, next) => {
     try {
-        // console.log(req.cookie);
         
         const token = req.cookies.jwtlogintoken;
     
@@ -46,11 +45,9 @@ export const authMiddleware = async(req, res, next) => {
 
         next();
     } catch (error) {
-        console.log(error);
-        
         return res.status(500).json({
             success : false,
-            message : "Error alidating user",
+            message : "Error validating user",
             error
         })
     }
