@@ -24,6 +24,15 @@ const SkillsPieChart = ({ skills }) => {
   const total = data.reduce((acc, curr) => acc + curr.value, 0);
 
   const COLORS = ["#6366F1", "#F59E0B", "#3F3F46"];
+
+  if(skills.length === 0) {
+    return (
+      <div className="bg-slate-950 border border-white/10 p-8 rounded-xl h-96 flex items-center justify-center shadow-inner shadow-black/20">
+        <p className="text-slate-400">No skill data available</p>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-slate-950 border border-white/10 rounded-xl h-96 p-8 flex flex-col items-center justify-center shadow-inner shadow-black/20">
       <h2 className="font-semibold text-lg text-white">Skill Distribution</h2>

@@ -12,6 +12,7 @@ import {
 import { chartColors } from "../../config/chartConfig";
 
 const ExperienceChart = ({ experiences }) => {
+
   const nowYear = new Date().getFullYear();
 
   const getYear = (date) => {
@@ -40,8 +41,6 @@ const ExperienceChart = ({ experiences }) => {
     })
     .filter(Boolean)
     .sort((a, b) => a.start - b.start);
-
-  console.log(data);
 
   const CustomTooltip = ({ active, payload }) => {
     if (!active || !payload || !payload.length) return null;
@@ -93,10 +92,15 @@ const ExperienceChart = ({ experiences }) => {
 
   const maxYear = years.length > 0 ? Math.max(...years) + 1 : nowYear;
 
-  console.log(minYear, maxYear);
-  console.log("years", years);
-
   const range = Math.max(maxYear - minYear, 1);
+
+  if(experiences.length === 0) {
+    return (
+      <div className="bg-slate-950 border border-white/10 p-8 rounded-xl h-96 flex items-center justify-center shadow-inner shadow-black/20">
+        <p className="text-slate-400">No experience data available</p>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-slate-950 border border-white/10 p-8 rounded-xl h-96 flex flex-col items-center shadow-inner shadow-black/20">

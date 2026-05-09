@@ -86,21 +86,26 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
       {/* User section */}
       <div className="border-t border-white/10 pt-4 mt-4">
         <div className="flex items-center gap-3">
-          {/* Avatar */}
-          <img
-            src={authUser?.image || "https://via.placeholder.com/40"}
-            alt="user"
-            className="w-10 h-10 rounded-full object-cover ring-1 ring-white/10"
-          />
-          {/* Name */}
-          {isExpanded && (
-            <div className="flex-1">
-              <p className="text-sm font-semibold text-white">
-                {authUser?.name || "User"}
-              </p>
-              <p className="text-xs text-slate-400">Product Owner</p>
-            </div>
-          )}
+          <div
+            onClick={() => navigate("/profile")}
+            className="flex flex-1 cursor-pointer items-center gap-3 transition hover:opacity-90"
+          >
+            {/* Avatar */}
+            <img
+              src={authUser?.image || "https://via.placeholder.com/40"}
+              alt="user"
+              className="w-10 h-10 rounded-full object-cover ring-1 ring-white/10 transition duration-200 ease-in-out hover:ring-cyan-400/60"
+            />
+            {/* Name */}
+            {isExpanded && (
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-white">
+                  {authUser?.name || "User"}
+                </p>
+                <p className="text-xs text-slate-400">Product Owner</p>
+              </div>
+            )}
+          </div>
 
           {/* Logout */}
           <button

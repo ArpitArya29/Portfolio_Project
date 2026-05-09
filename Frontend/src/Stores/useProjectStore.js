@@ -46,9 +46,6 @@ export const useProjectStore = create((set, get) => ({
     updateProject : async(data, id) => {
         set({ isUpdatingProject : true });
 
-        console.log("update data",data);
-        
-
         try {
             const response = await axiosInstance.put(`/user/projects/update/${id}`, data);
 

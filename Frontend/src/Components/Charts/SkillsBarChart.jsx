@@ -11,14 +11,18 @@ import {
 import { chartColors } from "../../config/chartConfig";
 
 const SkillsBarChart = ({ skills }) => {
-  console.log(skills);
-
   const data = skills.map((s) => ({
     name: s.name.charAt(0).toUpperCase() + s.name.slice(1),
     level: s.proficiency,
   }));
 
-  console.log(data);
+  if(skills.length === 0) {
+    return (
+      <div className="bg-slate-950 border border-white/10 p-8 rounded-xl h-96 flex items-center justify-center shadow-inner shadow-black/20">
+        <p className="text-slate-400">No skill data available</p>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-slate-950 border border-white/10 p-8 rounded-xl h-96 flex flex-col justify-center items-center shadow-inner shadow-black/20">

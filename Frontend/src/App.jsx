@@ -15,6 +15,7 @@ import ExperiencePage from "./Pages/ExperiencePage";
 import ProjectPage from "./Pages/ProjectPage";
 import PortfolioPage from "./Pages/PortfolioPage";
 import UserPortfolioPage from "./Pages/UserPortfolioPage";
+import ProfilePage from "./Pages/ProfilePage";
 
 const App = () => {
   const { authUser, isCheckingAuth, checkAuth, logout } = useAuthStore();
@@ -23,7 +24,7 @@ const App = () => {
     checkAuth();
   }, []);
 
-  if (isCheckingAuth && !authUser) {
+  if (isCheckingAuth) {
     return (
       <div className="flex items-center justify-center h-screen">
         <Loader className="size-10 animate-spin" />
@@ -54,6 +55,11 @@ const App = () => {
         />
 
         <Route
+          path="/profile"
+          element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
+        />
+
+        <Route
           path="/app"
           element={
             <ProtectedRoute>
@@ -69,7 +75,7 @@ const App = () => {
           <Route path="portfolios" element={<PortfolioPage />} />
         </Route>
 
-        <Route path="/portfolio/:publicId" element={<UserPortfolioPage/>}/>
+        <Route path="/portfolio/:publicId" element={<UserPortfolioPage />} />
       </Routes>
     </div>
   );

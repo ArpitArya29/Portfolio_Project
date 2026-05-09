@@ -8,7 +8,7 @@ export const useAuthStore = create( (set) => ({
     isSignedUp : false,
     isLoggingIn : false,
     isLoggingOut : false,
-    isCheckingAuth : false,
+    isCheckingAuth : true,
 
     checkAuth : async() => {
         set( {isCheckingAuth : true})
@@ -72,10 +72,13 @@ export const useAuthStore = create( (set) => ({
 
             toast.success(response.data.message);
         } catch (error) {
-            console.log("Error logging-out", error);
             toast.error("Error logging-out")
         } finally {
             set( {isLoggingOut : false} )
         }
+    },
+
+    setAuthUser : (user) => {
+        set( {authUser : user} )
     }
 }))

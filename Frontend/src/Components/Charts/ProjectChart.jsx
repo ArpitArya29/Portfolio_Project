@@ -11,6 +11,14 @@ const ProjectChart = ({ projects }) => {
   const livePercent = ((live / total) * 100).toFixed(1);
   const githubPercentage = ((github / total) * 100).toFixed(1);
 
+  if(projects.length === 0) {
+    return (
+      <div className="bg-slate-950 border border-white/10 p-8 rounded-xl h-96 flex items-center justify-center shadow-inner shadow-black/20">
+        <p className="text-slate-400">No project data available</p>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-slate-950 border border-white/10  p-8 rounded-2xl flex flex-col items-center h-96 shadow-inner shadow-black/20">
       <div className="flex flex-col lg:flex-row items-center justify-between gap-2">
