@@ -141,7 +141,7 @@ const ProfileUpdateModel = ({ user, onClose }) => {
               <button
                 type="button"
                 onClick={() => document.getElementById("imageUpload").click()}
-                className="inline-flex items-center justify-center rounded-3xl bg-gradient-to-r from-indigo-500 to-purple-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition hover:scale-[1.02]"
+                className="inline-flex items-center justify-center rounded-3xl bg-linear-to-r from-indigo-500 to-purple-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition hover:scale-[1.02]"
               >
                 Choose Image
               </button>
@@ -176,7 +176,7 @@ const ProfileUpdateModel = ({ user, onClose }) => {
               <button
                 onClick={handleSubmit}
                 disabled={isUpdatingUserDetails}
-                className="inline-flex items-center justify-center rounded-3xl bg-gradient-to-r from-indigo-500 to-purple-500 px-5 py-3 text-sm font-semibold text-white shadow-xl shadow-indigo-500/20 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex items-center justify-center rounded-3xl bg-linear-to-r from-indigo-500 to-purple-500 px-5 py-3 text-sm font-semibold text-white shadow-xl shadow-indigo-500/20 transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isUpdatingUserDetails ? "Updating..." : "Update Profile"}
               </button>
