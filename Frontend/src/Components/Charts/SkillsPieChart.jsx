@@ -1,5 +1,5 @@
 import React from "react";
-import { PieChart, Pie, Tooltip, Cell } from "recharts";
+import { PieChart, Pie, Tooltip, Cell, ResponsiveContainer } from "recharts";
 import { chartColors } from "../../config/chartConfig";
 
 const SkillsPieChart = ({ skills }) => {
@@ -36,22 +36,24 @@ const SkillsPieChart = ({ skills }) => {
   return (
     <div className="bg-slate-950 border border-white/10 rounded-xl h-96 p-8 flex flex-col items-center justify-center shadow-inner shadow-black/20">
       <h2 className="font-semibold text-lg text-white">Skill Distribution</h2>
-      <div className="flex items-center justify-around">
-        <PieChart width={300} height={300}>
-          <Pie data={data} dataKey="value" outerRadius={100} stroke="none">
-            {data.map((_, idx) => (
-              <Cell key={idx} fill={COLORS[idx]} />
-            ))}
-          </Pie>
-          <Tooltip
-            contentStyle={{
-              backgroundColor: "#18181B",
-              border: "1px solid #27272A",
-              borderRadius: "8px",
-              color: "#fff",
-            }}
-          />
-        </PieChart>
+      <div className="flex items-center justify-around w-full">
+        <ResponsiveContainer width="100%" height={300} minHeight={0}>
+          <PieChart>
+            <Pie data={data} dataKey="value" outerRadius={100} stroke="none">
+              {data.map((_, idx) => (
+                <Cell key={idx} fill={COLORS[idx]} />
+              ))}
+            </Pie>
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#18181B",
+                border: "1px solid #27272A",
+                borderRadius: "8px",
+                color: "#fff",
+              }}
+            />
+          </PieChart>
+        </ResponsiveContainer>
         <div className="space-y-3 text-sm">
           {data.map((item, idx) => (
             <div

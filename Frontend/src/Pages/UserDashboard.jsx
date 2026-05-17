@@ -8,7 +8,7 @@ import { useExperienceStore } from "../Stores/useExperienceStore";
 import StatsCard from "../Components/StatsCard";
 import SkillsBarChart from "../Components/Charts/SkillsBarChart";
 import SkillsPieChart from "../Components/Charts/SkillsPieChart";
-import ExperienceChart from "../Components/Charts/experienceChart";
+import ExperienceChart from "../Components/Charts/ExperienceChart";
 import ProjectChart from "../Components/Charts/ProjectChart";
 import { usePortfolioStore } from "../Stores/usePortfolioStore";
 

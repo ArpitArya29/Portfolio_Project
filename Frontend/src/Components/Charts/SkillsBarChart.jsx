@@ -16,7 +16,7 @@ const SkillsBarChart = ({ skills }) => {
     level: s.proficiency,
   }));
 
-  if(skills.length === 0) {
+  if (skills.length === 0) {
     return (
       <div className="bg-slate-950 border border-white/10 p-8 rounded-xl h-96 flex items-center justify-center shadow-inner shadow-black/20">
         <p className="text-slate-400">No skill data available</p>
@@ -30,28 +30,35 @@ const SkillsBarChart = ({ skills }) => {
         Skill Proficiency
       </h2>
 
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data}>
-          <CartesianGrid stroke={chartColors.grid} strokeDasharray="3 3" />
-          <XAxis
-            dataKey="name"
-            stroke={chartColors.text}
-            tick={{
-              fill: chartColors.text,
-              fontSize: 16,
-            }}
-            angle={-45}
-            textAnchor="end"
-            interval={0}
-            height={80}
-          />
-          <YAxis stroke={chartColors.text} />
-          <Tooltip
-            contentStyle={{ backgroundColor: "#1f2937", border: "none" }}
-          />
-          <Bar dataKey="level" fill="#6366F1" radius={[6, 6, 0, 0]} />
-        </BarChart>
-      </ResponsiveContainer>
+      <div className="flex-1 w-full min-h-0">
+        <ResponsiveContainer
+          width="100%"
+          height={260}
+          minWidth={0}
+          minHeight={0}
+        >
+          <BarChart data={data}>
+            <CartesianGrid stroke={chartColors.grid} strokeDasharray="3 3" />
+            <XAxis
+              dataKey="name"
+              stroke={chartColors.text}
+              tick={{
+                fill: chartColors.text,
+                fontSize: 16,
+              }}
+              angle={-45}
+              textAnchor="end"
+              interval={0}
+              height={80}
+            />
+            <YAxis stroke={chartColors.text} />
+            <Tooltip
+              contentStyle={{ backgroundColor: "#1f2937", border: "none" }}
+            />
+            <Bar dataKey="level" fill="#6366F1" radius={[6, 6, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };

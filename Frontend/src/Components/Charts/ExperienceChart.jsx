@@ -12,7 +12,6 @@ import {
 import { chartColors } from "../../config/chartConfig";
 
 const ExperienceChart = ({ experiences }) => {
-
   const nowYear = new Date().getFullYear();
 
   const getYear = (date) => {
@@ -94,7 +93,7 @@ const ExperienceChart = ({ experiences }) => {
 
   const range = Math.max(maxYear - minYear, 1);
 
-  if(experiences.length === 0) {
+  if (experiences.length === 0) {
     return (
       <div className="bg-slate-950 border border-white/10 p-8 rounded-xl h-96 flex items-center justify-center shadow-inner shadow-black/20">
         <p className="text-slate-400">No experience data available</p>
@@ -108,36 +107,43 @@ const ExperienceChart = ({ experiences }) => {
         Experience Timeline
       </h2>
 
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart layout="vertical" data={data}>
-          <CartesianGrid stroke={chartColors.grid} strokeDasharray="3 3" />
+      <div className="flex-1 w-full min-h-0">
+        <ResponsiveContainer
+          width="100%"
+          height={260}
+          minWidth={0}
+          minHeight={0}
+        >
+          <BarChart layout="vertical" data={data}>
+            <CartesianGrid stroke={chartColors.grid} strokeDasharray="3 3" />
 
-          <XAxis
-            type="number"
-            domain={[minYear, maxYear]}
-            allowDataOverflow={true}
-            stroke={chartColors.text}
-            tick={{ fill: chartColors.text }}
-            ticks={Array.from({ length: range + 1 }, (_, i) => minYear + i)}
-          />
+            <XAxis
+              type="number"
+              domain={[minYear, maxYear]}
+              allowDataOverflow={true}
+              stroke={chartColors.text}
+              tick={{ fill: chartColors.text }}
+              ticks={Array.from({ length: range + 1 }, (_, i) => minYear + i)}
+            />
 
-          <YAxis
-            dataKey="name"
-            type="category"
-            width={120}
-            stroke={chartColors.text}
-            tick={{ fill: chartColors.text }}
-          />
+            <YAxis
+              dataKey="name"
+              type="category"
+              width={120}
+              stroke={chartColors.text}
+              tick={{ fill: chartColors.text }}
+            />
 
-          <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={<CustomTooltip />} />
 
-          <Bar
-            dataKey="duration"
-            barSize={24}
-            shape={renderBar(minYear, maxYear)}
-          />
-        </BarChart>
-      </ResponsiveContainer>
+            <Bar
+              dataKey="duration"
+              barSize={24}
+              shape={renderBar(minYear, maxYear)}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 };
