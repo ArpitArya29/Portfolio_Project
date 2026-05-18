@@ -6,8 +6,10 @@ const ProjectOverviewChart = ({ projects }) => {
   const live = projects.filter((p) => p.live_link).length;
   const github = projects.filter((p) => p.github_link).length;
 
+  const innerRadius = 40;
   const livePercent = (live / total) * 100;
   const githubPercentage = (github / total) * 100;
+  const centerDiameter = innerRadius * 2;
 
   return (
     <div className="relative w-64 h-56 min-h-0">
@@ -23,7 +25,7 @@ const ProjectOverviewChart = ({ projects }) => {
             <Pie
               data={[{ value: 100 }]}
               outerRadius={98}
-              innerRadius={83}
+              innerRadius={85}
               dataKey="value"
               stroke="none"
             >
@@ -32,7 +34,7 @@ const ProjectOverviewChart = ({ projects }) => {
             <Pie
               data={[{ value: 100 }]}
               outerRadius={98}
-              innerRadius={83}
+              innerRadius={85}
               dataKey="value"
               stroke="none"
               cornerRadius={50}
@@ -43,8 +45,8 @@ const ProjectOverviewChart = ({ projects }) => {
             {/* Middle ring (live) */}
             <Pie
               data={[{ value: 100 }]}
-              outerRadius={75}
-              innerRadius={62}
+              outerRadius={80}
+              innerRadius={65}
               dataKey="value"
               stroke="none"
             >
@@ -52,8 +54,8 @@ const ProjectOverviewChart = ({ projects }) => {
             </Pie>
             <Pie
               data={[{ value: livePercent }]}
-              outerRadius={75}
-              innerRadius={62}
+              outerRadius={80}
+              innerRadius={65}
               dataKey="value"
               stroke="none"
               cornerRadius={50}
@@ -66,8 +68,8 @@ const ProjectOverviewChart = ({ projects }) => {
             {/* Inner ring */}
             <Pie
               data={[{ value: 100 }]}
-              outerRadius={48}
-              innerRadius={38}
+              outerRadius={55}
+              innerRadius={40}
               dataKey="value"
               stroke="none"
             >
@@ -75,8 +77,8 @@ const ProjectOverviewChart = ({ projects }) => {
             </Pie>
             <Pie
               data={[{ value: githubPercentage }]}
-              outerRadius={48}
-              innerRadius={38}
+              outerRadius={55}
+              innerRadius={40}
               dataKey="value"
               stroke="none"
               cornerRadius={50}
@@ -90,9 +92,14 @@ const ProjectOverviewChart = ({ projects }) => {
       </div>
 
       {/* Centre text */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-1">
-        <p className="text-sm text-gray-300">Total Projects</p>
-        <p className="text-3xl font-bold">{total}</p>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div
+          className="flex flex-col items-center justify-center gap-1 rounded-full bg-slate-950/80"
+          style={{ width: centerDiameter, height: centerDiameter }}
+        >
+          <p className="text-sm text-gray-300">All Projects</p>
+          <p className="text-3xl font-bold">{total}</p>
+        </div>
       </div>
     </div>
   );
