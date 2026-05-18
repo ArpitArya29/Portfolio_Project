@@ -22,7 +22,7 @@ export const register = async(req, res) => {
 
         let imagePath;
         if(req.file) {
-            imagePath = await uploadOnClaudinary(req.file.path);
+            imagePath = await uploadOnClaudinary(req.file.buffer);
         }
         
         const hashedPassword = await bcrypt.hash(password, 10);

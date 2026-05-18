@@ -33,7 +33,7 @@ export const updateProfile = async(req, res) => {
 
         let imagePath;
         if(req.file) {
-            imagePath = await uploadOnClaudinary(req.file.path);
+            imagePath = await uploadOnClaudinary(req.file.buffer);
         }
 
         const updatedUser = await db.user.update({

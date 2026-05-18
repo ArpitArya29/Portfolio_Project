@@ -7,19 +7,34 @@ claudinary.config( {
     api_secret : process.env.CLAUDINARY_APISECRET
 })
 
-export const uploadOnClaudinary = async(localFilePath) => {
+export const uploadOnClaudinary = async(fileBuffer) => {
     try {
-        if(!localFilePath) return null;
+        if(!fileBuffer) return null;
 
-        const response = await claudinary.uploader.upload(localFilePath, {
-            folder : "portfolioProject",
-            resource_type : "auto"
-        });
+        // const response = await claudinary.uploader.upload(localFilePath, {
+        //     folder : "portfolioProject",
+        //     resource_type : "auto"
+        // });
+
+        const response = await new Promise((res, rej) => {
+            const stream = claudinary.uploader.upload_stream(
+                { 
+                    folder : "portfolioProject", 
+                    resource_type : "auto" 
+                },
+                (error, result) => {
+                    if(error) rej(error);
+                    else res(result);
+                }
+            )
+
+            stream.end(fileBuffer);
+        })
 
         return response;
     } catch (error) {
-        fs.unlinkSync(localFilePath);
-
+        console.log("Cloudinary upload failed", error);
+        
         return null;
     }
 }
