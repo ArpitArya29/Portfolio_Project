@@ -3,6 +3,10 @@
     {
       "source": "/api/v1/:path*",
       "destination": " https://portfolio-project-pb0d.onrender.com/api/v1/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
