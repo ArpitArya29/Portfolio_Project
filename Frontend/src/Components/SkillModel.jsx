@@ -8,7 +8,13 @@ const SkillModel = ({ editSkill, onClose }) => {
 
   const [skills, setSkills] = useState(
     editSkill
-      ? [{ id: editSkill.id, name: editSkill.name, proficiency: editSkill.proficiency }]
+      ? [
+          {
+            id: editSkill.id,
+            name: editSkill.name,
+            proficiency: editSkill.proficiency,
+          },
+        ]
       : [{ id: crypto.randomUUID(), name: "", proficiency: 1 }],
   );
 
@@ -19,7 +25,10 @@ const SkillModel = ({ editSkill, onClose }) => {
   };
 
   const addMore = () => {
-    setSkills([...skills, { id: crypto.randomUUID(), name: "", proficiency: 1 }]);
+    setSkills([
+      ...skills,
+      { id: crypto.randomUUID(), name: "", proficiency: 1 },
+    ]);
   };
 
   const handleRemove = (removedIndex) => {
@@ -66,7 +75,7 @@ const SkillModel = ({ editSkill, onClose }) => {
                   <Trash2 size={16} />
                 </button>
               </div>
-              <div className="flex gap-2">
+              <div className="flex flex-col gap-2 sm:flex-row">
                 <input
                   value={skill.name}
                   onChange={(e) => handleChange(index, "name", e.target.value)}
@@ -82,7 +91,7 @@ const SkillModel = ({ editSkill, onClose }) => {
                   onChange={(e) =>
                     handleChange(index, "proficiency", e.target.value)
                   }
-                  className="w-16 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none transition-colors"
+                  className="w-full sm:w-20 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none transition-colors"
                 />
               </div>
             </div>
@@ -111,7 +120,13 @@ const SkillModel = ({ editSkill, onClose }) => {
             onClick={handleSubmit}
             className="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-colors"
           >
-            Save
+            {editSkill
+              ? isUpdatingSkill
+                ? "Updating..."
+                : "Update"
+              : isAddingSkills
+                ? "Adding..."
+                : "Add"}
           </button>
         </div>
       </div>

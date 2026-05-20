@@ -16,6 +16,7 @@ import ProjectPage from "./Pages/ProjectPage";
 import PortfolioPage from "./Pages/PortfolioPage";
 import UserPortfolioPage from "./Pages/UserPortfolioPage";
 import ProfilePage from "./Pages/ProfilePage";
+import RocketLoader from "./Components/Charts/Loaders/RocketLoader";
 
 const App = () => {
   const { authUser, isCheckingAuth, checkAuth, logout } = useAuthStore();
@@ -27,7 +28,7 @@ const App = () => {
   if (isCheckingAuth) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <Loader className="size-10 animate-spin" />
+        <RocketLoader/>
       </div>
     );
   }

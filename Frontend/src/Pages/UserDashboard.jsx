@@ -62,7 +62,8 @@ const UserDashboard = () => {
       </div>
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* We will be hiding these on small screens */}
+      <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white/5 rounded-2xl p-6 border border-white/10 shadow-lg hover:shadow-xl transition-shadow duration-300 max-w-full overflow-hidden">
           <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-blue-400"></span>

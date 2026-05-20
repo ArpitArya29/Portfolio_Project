@@ -55,7 +55,7 @@ const ProjectModel = ({ editProject, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50">
-      <div className="bg-slate-900 border border-white/10 p-6 rounded-2xl w-full max-w-5xl space-y-4 max-h-[90vh] flex flex-col shadow-2xl">
+      <div className="bg-slate-900 border border-white/10 p-4 sm:p-6 rounded-2xl w-full max-w-[calc(100vw-2rem)] sm:max-w-5xl space-y-4 max-h-[90vh] flex flex-col shadow-2xl">
         <div className="p-4 border-b border-white/10">
           <h2 className="text-lg font-semibold text-white">
             {editProject ? "Edit Project" : "Add Projects"}
@@ -77,8 +77,8 @@ const ProjectModel = ({ editProject, onClose }) => {
                 </button>
               </div>
 
-              <div className="grid grid-cols-5 grid-rows-3 gap-4">
-                <div className="col-start-1 row-start-1 col-span-2">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-5">
+                <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-slate-300 mb-2">
                     Title
                   </label>
@@ -92,7 +92,7 @@ const ProjectModel = ({ editProject, onClose }) => {
                   />
                 </div>
 
-                <div className="col-start-3 row-start-1 col-span-3 row-span-3 flex flex-col">
+                <div className="md:col-span-3 flex flex-col">
                   <label className="block text-sm font-medium text-slate-300 mb-2">
                     Description
                   </label>
@@ -107,7 +107,7 @@ const ProjectModel = ({ editProject, onClose }) => {
                   />
                 </div>
 
-                <div className="col-start-1 row-start-2 col-span-2">
+                <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-slate-300 mb-2">
                     Live Link
                   </label>
@@ -121,7 +121,7 @@ const ProjectModel = ({ editProject, onClose }) => {
                   />
                 </div>
 
-                <div className="col-start-1 row-start-3 col-span-2">
+                <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-slate-300 mb-2">
                     Github Link
                   </label>
@@ -162,7 +162,13 @@ const ProjectModel = ({ editProject, onClose }) => {
             onClick={handleSubmit}
             className="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-colors"
           >
-            Save
+            {editProject
+              ? isAddingProject
+                ? "Updating..."
+                : "Update"
+              : isAddingProject
+                ? "Adding..."
+                : "Add"}
           </button>
         </div>
       </div>

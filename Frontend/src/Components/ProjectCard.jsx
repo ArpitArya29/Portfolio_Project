@@ -6,9 +6,9 @@ const ProjectCard = ({ project, onEdit }) => {
   const { deleteProject, isDeletingProject } = useProjectStore();
 
   return (
-    <div className="bg-white/5 border border-white/10 rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:bg-white/10 cursor-pointer flex flex-col min-h-56 max-h-72">
+    <div className="bg-white/5 border border-white/10 rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:bg-white/10 cursor-pointer flex flex-col min-h-56">
       {/* Top section */}
-      <div className="flex justify-between items-start">
+      <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-start">
         <div className="flex-1">
           <h2 className="text-2xl font-semibold text-white">{project.title}</h2>
 
@@ -18,7 +18,7 @@ const ProjectCard = ({ project, onEdit }) => {
         </div>
 
         {/* Actions */}
-        <div className="flex gap-2 ml-4">
+        <div className="flex gap-2 sm:ml-4">
           <button
             onClick={() => onEdit()}
             className="group p-2 rounded-lg hover:bg-white/5 transition-colors"
@@ -49,7 +49,7 @@ const ProjectCard = ({ project, onEdit }) => {
         {!(project.live_link || project.github_link) ? (
           <div className="text-center text-yellow-400 py-2">No links added</div>
         ) : (
-          <div className="flex items-center justify-center gap-6">
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-6">
             {/* Live Link */}
             {project.live_link && (
               <a

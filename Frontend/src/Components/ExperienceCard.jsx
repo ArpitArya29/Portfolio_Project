@@ -23,7 +23,7 @@ const ExperienceCard = ({ experience, onEdit }) => {
       className="bg-white/5 border border-white/10 rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:bg-white/10 cursor-pointer"
     >
       {/* Top Section */}
-      <div className="flex justify-between items-start">
+      <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-start">
         <div className="flex-1">
           <h2 className="text-xl font-semibold text-white">
             {experience.role}
@@ -47,7 +47,7 @@ const ExperienceCard = ({ experience, onEdit }) => {
         </div>
 
         {/* Actions */}
-        <div className="flex gap-2 ml-4">
+        <div className="flex gap-2 sm:ml-4">
           <button
             onClick={(e) => {
               e.stopPropagation();

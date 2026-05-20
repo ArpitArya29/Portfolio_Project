@@ -10,7 +10,12 @@ const PortfolioModel = ({ editPortfolio, onClose }) => {
   const { allProjects } = useProjectStore();
   const { allExperiences } = useExperienceStore();
 
-  const { addPortfolio, updatePortfolio } = usePortfolioStore();
+  const {
+    addPortfolio,
+    updatePortfolio,
+    isCreatingPortfolio,
+    isUpdatingPortfolio,
+  } = usePortfolioStore();
 
   const [title, setTitle] = useState("");
   const [bio, setBio] = useState("");
@@ -90,7 +95,7 @@ const PortfolioModel = ({ editPortfolio, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50">
-      <div className="bg-slate-900 border border-white/10 w-full max-w-4xl max-h-[90vh] flex flex-col rounded-2xl shadow-2xl">
+      <div className="bg-slate-900 border border-white/10 w-full max-w-[calc(100vw-2rem)] sm:max-w-4xl max-h-[90vh] flex flex-col rounded-2xl shadow-2xl">
         <div className="p-4 border-b border-white/10">
           <h2 className="text-lg font-semibold text-white">
             {editPortfolio ? "Edit Portfolio" : "Create Portfolio"}
@@ -157,7 +162,13 @@ const PortfolioModel = ({ editPortfolio, onClose }) => {
             onClick={handleSubmit}
             className="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-colors"
           >
-            Save
+            {editPortfolio
+              ? isUpdatingPortfolio
+                ? "Updating..."
+                : "Update"
+              : isCreatingPortfolio
+                ? "Creating..."
+                : "Create"}
           </button>
         </div>
       </div>

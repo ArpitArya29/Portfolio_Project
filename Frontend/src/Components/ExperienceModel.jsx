@@ -47,7 +47,9 @@ const ExperienceModel = ({ editExperience, onClose }) => {
     if (editExperience) {
       await updateExperience(filteredExperiences[0], editExperience.id);
     } else {
-      const experiencesToSubmit = filteredExperiences.map(({ id, ...rest }) => rest);
+      const experiencesToSubmit = filteredExperiences.map(
+        ({ id, ...rest }) => rest,
+      );
       await addExperiences({ experiences: experiencesToSubmit });
     }
 
@@ -69,7 +71,7 @@ const ExperienceModel = ({ editExperience, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50">
-      <div className="bg-slate-900 border border-white/10 p-6 rounded-2xl w-full max-w-4xl space-y-4 max-h-[90vh] flex flex-col shadow-2xl">
+      <div className="bg-slate-900 border border-white/10 p-4 sm:p-6 rounded-2xl w-full max-w-[calc(100vw-2rem)] sm:max-w-4xl space-y-4 max-h-[90vh] flex flex-col shadow-2xl">
         <div className="p-4 border-b border-white/10">
           <h2 className="text-lg font-semibold text-white">
             {editExperience ? "Edit Experience" : "Add Experiences"}
@@ -91,8 +93,8 @@ const ExperienceModel = ({ editExperience, onClose }) => {
                 </button>
               </div>
 
-              <div className="grid grid-cols-3 grid-rows-3 gap-4">
-                <div className="col-start-1 row-start-1">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                <div className="sm:col-span-1">
                   <label className="block text-sm font-medium text-slate-300 mb-2">
                     Company
                   </label>
@@ -106,7 +108,7 @@ const ExperienceModel = ({ editExperience, onClose }) => {
                   />
                 </div>
 
-                <div className="col-start-2 row-start-1 col-span-2 row-span-2 flex flex-col">
+                <div className="sm:col-span-2 flex flex-col">
                   <label className="block text-sm font-medium text-slate-300 mb-2">
                     Description
                   </label>
@@ -121,7 +123,7 @@ const ExperienceModel = ({ editExperience, onClose }) => {
                   />
                 </div>
 
-                <div className="col-start-1 row-start-2">
+                <div className="sm:col-span-1">
                   <label className="label">
                     <span className="label-text font-medium">Role</span>
                   </label>
@@ -135,7 +137,7 @@ const ExperienceModel = ({ editExperience, onClose }) => {
                   />
                 </div>
 
-                <div className="col-start-1 row-start-3">
+                <div className="sm:col-span-1">
                   <label className="label">
                     <span className="label-text font-medium">Location</span>
                   </label>
@@ -149,7 +151,7 @@ const ExperienceModel = ({ editExperience, onClose }) => {
                   />
                 </div>
 
-                <div className="col-start-2 row-start-3">
+                <div className="sm:col-span-1">
                   <label className="block text-sm font-medium text-slate-300 mb-2">
                     Start Date
                   </label>
@@ -164,7 +166,7 @@ const ExperienceModel = ({ editExperience, onClose }) => {
                   />
                 </div>
 
-                <div className="col-start-3 row-start-3">
+                <div className="sm:col-span-1">
                   <label className="block text-sm font-medium text-slate-300 mb-2">
                     End Date
                   </label>
@@ -206,7 +208,13 @@ const ExperienceModel = ({ editExperience, onClose }) => {
             onClick={handleSubmit}
             className="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-colors"
           >
-            Save
+            {editExperience
+              ? isUpdatingExperience
+                ? "Saving..."
+                : "Save Changes"
+              : isAddingExperiences
+                ? "Adding..."
+                : "Add Experience"}
           </button>
         </div>
       </div>
