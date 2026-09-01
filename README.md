@@ -62,24 +62,24 @@ PortIO/
 
 ### Dashboard
 
-![PortIO Dashboard](ScreenShots/PortIoDashBoard.png)
+<img src="ScreenShots/PortIoDashBoard.png" width="500">
 
 ### Profile Management
 
-![PortIO Profile](ScreenShots/PortIoProfileSection.png)
+<img src="ScreenShots/PortIoProfileSection.png" width="500">
 
 ### Profile Update
 
-![PortIO Profile Update](ScreenShots/PortIoUpdateProfile.png)
+<img src="ScreenShots/PortIoUpdateProfile.png" width="500">
 
 ### Published Portfolio
 
-![PortIO Portfolio](ScreenShots/User_PortfolioView1.png)
+<img src="ScreenShots/User_PortfolioView1.png" width="500">
 
 ### Portfolio Sections
 
-![PortIO Portfolio Sections](ScreenShots/User_PortfolioView2.png)
+<img src="ScreenShots/User_PortfolioView2.png" width="500">
 
 ### Responsive Design
 
-![PortIO Mobile](ScreenShots/PortIo_Mobile.jpeg)
+<img src="ScreenShots/PortIo_Mobile.jpeg" height="400" >
